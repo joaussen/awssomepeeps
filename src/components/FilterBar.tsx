@@ -33,8 +33,8 @@ export function FilterBar({
   return (
     <div className="max-w-6xl mx-auto px-6 mt-4 mb-6">
       <div className="flex items-center justify-between mb-3">
-        <span className="text-sm font-medium text-gray-500">Filters</span>
-        <span className="text-sm text-gray-400">{totalResults} results</span>
+        <span className="text-sm font-medium text-white">Filters</span>
+        <span className="text-sm text-white">{totalResults} results</span>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">

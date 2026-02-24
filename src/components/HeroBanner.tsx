@@ -30,16 +30,17 @@ export function HeroBanner({ onListProfile }: HeroBannerProps) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <img src="/smiley.svg" alt="" className="w-16 h-16 mx-auto mb-8" />
+        <img src="/smiley-blue.png" alt="" className="max-w-[120px] w-100 mx-auto mb-8" />
       </motion.div>
 
       <motion.h1
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.1 }}
-        className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-5 max-w-2xl mx-auto leading-[1.15] tracking-tight"
+        className="text-4xl md:text-5xl font-extrabold text-white mb-5 max-w-2xl mx-auto leading-[1.15] tracking-tight"
       >
-        Find your next hire among talented AWS alumni
+        Find your next hire among talented{' '}
+        <span className="text-[var(--color-brand)]">AWS alumni</span>
       </motion.h1>
 
       <div className="h-7 mb-8 relative">
@@ -50,7 +51,7 @@ export function HeroBanner({ onListProfile }: HeroBannerProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.3 }}
-            className="text-gray-400 text-lg absolute inset-x-0"
+            className="text-white text-lg absolute inset-x-0"
           >
             {taglines[taglineIndex]}
           </motion.p>
@@ -64,7 +65,7 @@ export function HeroBanner({ onListProfile }: HeroBannerProps) {
       >
         <button
           onClick={onListProfile}
-          className="inline-flex items-center gap-2 bg-brand hover:bg-brand-dark text-gray-900 font-semibold px-7 py-3.5 rounded-lg text-base transition-colors cursor-pointer shadow-sm"
+          className="inline-flex items-center gap-2 bg-brand hover:bg-brand-dark text-white font-semibold px-7 py-3.5 rounded-full text-base transition-colors cursor-pointer shadow-sm"
         >
           List your profile
           <ExternalLink size={16} />

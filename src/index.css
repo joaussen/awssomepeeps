@@ -6,6 +6,7 @@
   --color-brand-light: #ffc933;
   --color-brand-bg: #fff8e6;
   --color-blue: #0e82f9;
+  --color-blue-bg: #004285;
   --color-blue-dark: #0b6fdb;
   --color-green: #02ae70;
   --color-pink: #f36dc8;
@@ -23,7 +24,7 @@ body {
   font-family: var(--font-sans);
   color: #374151;
   min-height: 100vh;
-  background: #ffffff;
+  background: var(--color-blue);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

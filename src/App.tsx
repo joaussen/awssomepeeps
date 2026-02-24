@@ -69,7 +69,7 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[var(--color-blue)]">
       <Header />
       <HeroBanner onListProfile={() => setIsFormOpen(true)} />
       <StatsBar totalCandidates={candidates.length} />
