@@ -72,7 +72,7 @@ export function CandidateCard({ candidate, onRequestIntro }: CandidateCardProps)
           href={candidate.linkedIn || '#'}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex-1 inline-flex items-center justify-center gap-1.5 py-2 rounded-lg bg-[#0a66c2] text-white text-sm font-medium hover:bg-[#004182] transition-colors"
+          className="flex-1 inline-flex items-center justify-center gap-1.5 py-2 rounded-full bg-[#0a66c2] text-white text-sm font-medium hover:bg-[#004182] transition-colors"
         >
           <Linkedin size={14} />
           LinkedIn
@@ -80,7 +80,7 @@ export function CandidateCard({ candidate, onRequestIntro }: CandidateCardProps)
         {onRequestIntro && (
           <button
             onClick={onRequestIntro}
-            className="flex-1 inline-flex items-center justify-center gap-1.5 py-2 rounded-lg bg-brand text-gray-900 text-sm font-medium hover:bg-brand-dark transition-colors cursor-pointer"
+            className="flex-1 inline-flex items-center justify-center gap-1.5 py-2 rounded-full bg-brand text-white text-sm font-medium hover:bg-brand-dark transition-colors cursor-pointer"
           >
             <UserPlus size={14} />
             Request Intro
