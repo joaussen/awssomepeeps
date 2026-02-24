@@ -30,7 +30,7 @@ export function HeroBanner({ onListProfile }: HeroBannerProps) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <img src="/smiley-blue.png" alt="" className="max-w-[120px] w-100 mx-auto mb-8" />
+        <img src="/smiley-blue.png" alt="" className="max-w-[120px] w-full mx-auto mb-8" />
       </motion.div>
 
       <motion.h1

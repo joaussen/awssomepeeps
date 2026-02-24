@@ -9,7 +9,7 @@ export function StatsBar({ totalCandidates }: StatsBarProps) {
     <div className="max-w-3xl mx-auto px-6 mb-10">
       <div className="flex items-center justify-center gap-10 sm:gap-16 text-center">
         <div className="flex items-center gap-2.5">
-          <Building2 size={18} className="text-blue-bg" />
+          <Building2 size={18} className="text-[var(--color-blue-bg)]" />
           <div>
             <span className="text-xl font-bold text-white">150+</span>
             <span className="text-sm text-white ml-1.5">ISV Partners</span>
@@ -19,7 +19,7 @@ export function StatsBar({ totalCandidates }: StatsBarProps) {
         <div className="w-px h-6 bg-gray-200" />
 
         <div className="flex items-center gap-2.5">
-          <Users size={18} className="text-blue-bg" />
+          <Users size={18} className="text-[var(--color-blue-bg)]" />
           <div>
             <span className="text-xl font-bold text-white">{totalCandidates}</span>
             <span className="text-sm text-white ml-1.5">Alumni Listed</span>
@@ -29,7 +29,7 @@ export function StatsBar({ totalCandidates }: StatsBarProps) {
         <div className="hidden sm:block w-px h-6 bg-gray-200" />
 
         <div className="hidden sm:flex items-center gap-2.5">
-          <Handshake size={18} className="text-blue-bg" />
+          <Handshake size={18} className="text-[var(--color-blue-bg)]" />
           <div>
             <span className="text-xl font-bold text-white">100%</span>
             <span className="text-sm text-white ml-1.5">Free</span>
