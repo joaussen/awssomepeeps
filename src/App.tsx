@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { Header } from './components/Header'
 import { HeroBanner } from './components/HeroBanner'
@@ -10,9 +10,13 @@ import { CandidateCard } from './components/CandidateCard'
 import { BottomCTA } from './components/BottomCTA'
 import { IntakeFormModal } from './components/intake/IntakeFormModal'
 import { RequestIntroModal } from './components/intro/RequestIntroModal'
-import { candidates, superpowers, experienceLevels, workStyles } from './data/candidates'
+import { superpowers, experienceLevels, workStyles } from './data/candidates'
+import type { Candidate } from './data/candidates'
+import { supabase, isSupabaseConfigured } from './lib/supabase'
 
 function App() {
+  const [candidates, setCandidates] = useState<Candidate[]>([])
+  const [isLoading, setIsLoading] = useState(true)
   const [search, setSearch] = useState('')
   const [superpower, setSuperpower] = useState('')
   const [experience, setExperience] = useState('')
@@ -20,6 +24,50 @@ function App() {
   const [location, setLocation] = useState('')
   const [isFormOpen, setIsFormOpen] = useState(false)
   const [introCandidate, setIntroCandidate] = useState<string | null>(null)
+
+  const fetchCandidates = async () => {
+    if (!isSupabaseConfigured || !supabase) {
+      console.warn('Supabase not configured — no candidates to display')
+      setIsLoading(false)
+      return
+    }
+
+    try {
+      const { data, error } = await supabase
+        .from('candidates')
+        .select('name, title, location, work_style, superpower, bio, recent_wins, experience, linkedin_url')
+        .eq('status', 'approved')
+        .order('created_at', { ascending: false })
+
+      if (error) {
+        console.error('Error fetching candidates:', error)
+        setIsLoading(false)
+        return
+      }
+
+      const mapped: Candidate[] = (data || []).map((row) => ({
+        name: row.name,
+        title: row.title,
+        location: row.location,
+        workStyle: row.work_style as Candidate['workStyle'],
+        superpower: row.superpower,
+        bio: row.bio,
+        recentWins: row.recent_wins || [],
+        experience: row.experience as Candidate['experience'],
+        linkedIn: row.linkedin_url || undefined,
+      }))
+
+      setCandidates(mapped)
+    } catch (err) {
+      console.error('Unexpected error fetching candidates:', err)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    fetchCandidates()
+  }, [])
 
   const filtered = useMemo(() => {
     return candidates.filter((c) => {
@@ -42,7 +90,7 @@ function App() {
         matchesLocation
       )
     })
-  }, [search, superpower, experience, workStyle, location])
+  }, [candidates, search, superpower, experience, workStyle, location])
 
   const clearFilters = () => {
     setSearch('')
@@ -66,6 +114,12 @@ function App() {
     if (key === 'experience') setExperience('')
     if (key === 'workStyle') setWorkStyle('')
     if (key === 'location') setLocation('')
+  }
+
+  // Re-fetch candidates after form submission
+  const handleFormClose = () => {
+    setIsFormOpen(false)
+    fetchCandidates()
   }
 
   return (
@@ -104,33 +158,54 @@ function App() {
       )}
 
       <div className="max-w-6xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
-          {filtered.map((candidate, i) => (
-            <CandidateCard
-              key={`${candidate.name}-${i}`}
-              candidate={candidate}
-              onRequestIntro={() => setIntroCandidate(candidate.name)}
-            />
-          ))}
-        </div>
-
-        {filtered.length === 0 && (
+        {isLoading ? (
           <div className="text-center py-20">
-            <img
-              src="/smiley.svg"
-              alt=""
-              className="w-16 h-16 mx-auto mb-4 opacity-20"
-            />
-            <p className="text-gray-400 text-lg">
-              No candidates match your filters
-            </p>
-            <button
-              onClick={clearFilters}
-              className="mt-3 text-brand hover:text-brand-dark font-medium cursor-pointer transition-colors text-sm"
-            >
-              Clear all filters
-            </button>
+            <div className="w-8 h-8 border-3 border-white/30 border-t-white rounded-full animate-spin mx-auto mb-4" />
+            <p className="text-white/60 text-sm">Loading candidates...</p>
           </div>
+        ) : (
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+              {filtered.map((candidate, i) => (
+                <CandidateCard
+                  key={`${candidate.name}-${i}`}
+                  candidate={candidate}
+                  onRequestIntro={() => setIntroCandidate(candidate.name)}
+                />
+              ))}
+            </div>
+
+            {filtered.length === 0 && (
+              <div className="text-center py-20">
+                <img
+                  src="/smiley.svg"
+                  alt=""
+                  className="w-16 h-16 mx-auto mb-4 opacity-20"
+                />
+                <p className="text-white/60 text-lg">
+                  {candidates.length === 0
+                    ? 'No alumni listed yet — be the first!'
+                    : 'No candidates match your filters'}
+                </p>
+                {candidates.length > 0 && (
+                  <button
+                    onClick={clearFilters}
+                    className="mt-3 text-brand hover:text-brand-dark font-medium cursor-pointer transition-colors text-sm"
+                  >
+                    Clear all filters
+                  </button>
+                )}
+                {candidates.length === 0 && (
+                  <button
+                    onClick={() => setIsFormOpen(true)}
+                    className="mt-4 px-6 py-2.5 bg-brand hover:bg-brand-dark text-white font-semibold rounded-full text-sm transition-colors cursor-pointer"
+                  >
+                    List your profile
+                  </button>
+                )}
+              </div>
+            )}
+          </>
         )}
       </div>
 
@@ -140,7 +215,7 @@ function App() {
 
       <AnimatePresence>
         {isFormOpen && (
-          <IntakeFormModal onClose={() => setIsFormOpen(false)} />
+          <IntakeFormModal onClose={handleFormClose} />
         )}
       </AnimatePresence>
 
