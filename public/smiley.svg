@@ -1,9 +1,23 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
-  <circle cx="100" cy="100" r="95" fill="#FFB700"/>
-  <!-- Left eye -->
-  <circle cx="68" cy="80" r="12" fill="#1e293b"/>
-  <!-- Right eye -->
-  <circle cx="132" cy="80" r="12" fill="#1e293b"/>
-  <!-- Smile -->
-  <path d="M55 120 Q100 165 145 120" stroke="#1e293b" stroke-width="10" stroke-linecap="round" fill="none"/>
+  <!-- Circle outline -->
+  <circle cx="100" cy="100" r="88" stroke="#1A3A6B" stroke-width="12" fill="none"/>
+
+  <!-- M-shaped eyes — two peaks -->
+  <polyline
+    points="52,100 76,60 100,100 124,60 148,100"
+    stroke="#1A3A6B"
+    stroke-width="11"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    fill="none"
+  />
+
+  <!-- U-shaped smile with curl on right -->
+  <path
+    d="M52,118 Q52,168 100,168 Q140,168 140,130 Q140,118 132,118 Q124,118 124,130 Q124,142 116,142"
+    stroke="#1A3A6B"
+    stroke-width="11"
+    stroke-linecap="round"
+    fill="none"
+  />
 </svg>

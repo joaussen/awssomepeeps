@@ -98,7 +98,7 @@ export async function submitCandidate(
       github: formData.github.trim() || null,
       extra_notes: formData.extraNotes.trim() || null,
       turnstile_token: turnstileToken,
-      status: 'pending',
+      status: 'approved',
     })
 
     if (error) {

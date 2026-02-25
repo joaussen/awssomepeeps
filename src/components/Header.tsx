@@ -15,7 +15,6 @@ export function Header() {
         <nav className="hidden md:flex items-center gap-8 text-sm text-gray-500">
           <a href="https://awssome.io" target="_blank" rel="noopener noreferrer" className="text-white hover:underline transition-colors">Home</a>
           <a href="https://awssome.io/about-us" target="_blank" rel="noopener noreferrer" className="text-white hover:underline transition-colors">About</a>
-          <a href="https://awssome.io/partners" target="_blank" rel="noopener noreferrer" className="text-white hover:underline transition-colors">Partners</a>
         </nav>
       </div>
     </header>

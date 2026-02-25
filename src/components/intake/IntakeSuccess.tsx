@@ -17,7 +17,7 @@ export function IntakeSuccess({ onClose }: IntakeSuccessProps) {
         transition={{ type: 'spring', stiffness: 200, damping: 15, delay: 0.2 }}
       >
         <img
-          src="/smiley.svg"
+          src="/brand-logo.svg"
           alt=""
           className="w-24 h-24 object-contain mb-6"
         />
@@ -34,7 +34,7 @@ export function IntakeSuccess({ onClose }: IntakeSuccessProps) {
           <PartyPopper size={24} className="text-brand" style={{ transform: 'scaleX(-1)' }} />
         </div>
         <p className="text-gray-500 text-base max-w-md mx-auto mb-8">
-          Your profile has been submitted successfully. Our team will review it and you'll appear on the directory once approved.
+          Your profile is live on the directory! ISV partners can now find you and request intros.
         </p>
 
         <button
