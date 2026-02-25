@@ -179,7 +179,7 @@ function App() {
             {filtered.length === 0 && (
               <div className="text-center py-20">
                 <img
-                  src="/brand-logo.svg"
+                  src="/brand-logo.png"
                   alt=""
                   className="w-16 h-16 mx-auto mb-4 opacity-40"
                 />

@@ -17,7 +17,7 @@ export function IntakeSuccess({ onClose }: IntakeSuccessProps) {
         transition={{ type: 'spring', stiffness: 200, damping: 15, delay: 0.2 }}
       >
         <img
-          src="/brand-logo.svg"
+          src="/brand-logo.png"
           alt=""
           className="w-24 h-24 object-contain mb-6"
         />
