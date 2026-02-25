@@ -29,7 +29,6 @@ const initialFormData: IntakeFormData = {
   experience: '' as IntakeFormData['experience'],
   bio: '',
   recentWins: ['', '', ''],
-  resumeFile: null,
   photoFile: null,
   website: '',
   github: '',

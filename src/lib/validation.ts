@@ -59,23 +59,11 @@ export function validateStep2(data: {
 }
 
 export function validateStep3(data: {
-  resumeFile: File | null
   photoFile: File | null
   website: string
   github: string
 }): ValidationErrors {
   const errors: ValidationErrors = {}
-
-  if (data.resumeFile) {
-    const maxSize = 5 * 1024 * 1024 // 5MB
-    if (data.resumeFile.size > maxSize) {
-      errors.resumeFile = 'Resume must be under 5MB'
-    }
-    const validTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document']
-    if (!validTypes.includes(data.resumeFile.type)) {
-      errors.resumeFile = 'Resume must be a PDF or Word document'
-    }
-  }
 
   if (data.photoFile) {
     const maxSize = 2 * 1024 * 1024 // 2MB

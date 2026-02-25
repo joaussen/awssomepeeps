@@ -17,9 +17,17 @@ export function CandidateCard({ candidate, onRequestIntro }: CandidateCardProps)
       {/* Header */}
       <div className="p-5 pb-0">
         <div className="flex items-start gap-3">
-          <div className="w-11 h-11 rounded-full bg-brand/10 flex items-center justify-center shrink-0">
-            <span className="text-sm font-bold text-brand-dark">{initials}</span>
-          </div>
+          {candidate.photoUrl ? (
+            <img
+              src={candidate.photoUrl}
+              alt={candidate.name}
+              className="w-11 h-11 rounded-full object-cover shrink-0"
+            />
+          ) : (
+            <div className="w-11 h-11 rounded-full bg-brand/10 flex items-center justify-center shrink-0">
+              <span className="text-sm font-bold text-brand-dark">{initials}</span>
+            </div>
+          )}
           <div className="min-w-0">
             <h3 className="font-semibold text-gray-900 leading-snug">{candidate.name}</h3>
             <p className="text-brand-dark text-sm mt-0.5 leading-snug">{candidate.title}</p>

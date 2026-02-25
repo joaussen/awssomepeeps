@@ -11,11 +11,10 @@ export interface IntakeFormData {
   // Step 2
   superpower: string
   customSuperpower: string
-  experience: '5-10' | '10-15' | '15-25' | '25+'
+  experience: '1-5' | '5-10' | '10-15' | '15-25' | '25+'
   bio: string
   recentWins: string[]
   // Step 3
-  resumeFile: File | null
   photoFile: File | null
   website: string
   github: string
@@ -68,12 +67,7 @@ export async function submitCandidate(
   }
 
   try {
-    let resumeUrl: string | null = null
     let photoUrl: string | null = null
-
-    if (formData.resumeFile) {
-      resumeUrl = await uploadFile('resumes', formData.resumeFile, 'resume')
-    }
 
     if (formData.photoFile) {
       photoUrl = await uploadFile('photos', formData.photoFile, 'photo')
@@ -92,7 +86,6 @@ export async function submitCandidate(
       experience: formData.experience,
       bio: formData.bio.trim(),
       recent_wins: formData.recentWins.filter((w) => w.trim()),
-      resume_url: resumeUrl,
       photo_url: photoUrl,
       website: formData.website.trim() || null,
       github: formData.github.trim() || null,

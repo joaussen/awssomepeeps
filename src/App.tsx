@@ -35,7 +35,7 @@ function App() {
     try {
       const { data, error } = await supabase
         .from('candidates')
-        .select('name, title, location, work_style, superpower, bio, recent_wins, experience, linkedin_url')
+        .select('name, title, location, work_style, superpower, bio, recent_wins, experience, linkedin_url, photo_url')
         .eq('status', 'approved')
         .order('created_at', { ascending: false })
 
@@ -55,6 +55,7 @@ function App() {
         recentWins: row.recent_wins || [],
         experience: row.experience as Candidate['experience'],
         linkedIn: row.linkedin_url || undefined,
+        photoUrl: row.photo_url || undefined,
       }))
 
       setCandidates(mapped)

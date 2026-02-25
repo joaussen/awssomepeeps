@@ -1,4 +1,4 @@
-import { MapPin, Star, Briefcase, Linkedin, Globe, FileText } from 'lucide-react'
+import { MapPin, Star, Briefcase, Linkedin, Globe } from 'lucide-react'
 import type { IntakeFormData } from '../../lib/api'
 
 interface StepReviewProps {
@@ -72,11 +72,6 @@ export function IntakeStepReview({
           {data.website && (
             <span className="flex items-center gap-1">
               <Globe size={12} /> {data.website}
-            </span>
-          )}
-          {data.resumeFile && (
-            <span className="flex items-center gap-1 text-green">
-              <FileText size={12} /> Resume attached
             </span>
           )}
         </div>

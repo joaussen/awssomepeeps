@@ -4,7 +4,6 @@ import type { ValidationErrors } from '../../lib/validation'
 
 interface StepUploadProps {
   data: {
-    resumeFile: File | null
     photoFile: File | null
     website: string
     github: string
@@ -19,19 +18,8 @@ export function IntakeStepUpload({ data, errors, onChange, onFileChange }: StepU
   return (
     <div>
       <p className="text-sm text-gray-500 mb-6 italic">
-        Almost there! Drop your resume and let's make it official
+        Almost there! Add a photo and any extras
       </p>
-
-      <FormField label="Resume" hint="Upload your resume to stand out">
-        <FileUpload
-          accept=".pdf,.doc,.docx"
-          maxSizeMB={5}
-          label="PDF or Word document"
-          file={data.resumeFile}
-          onChange={(f) => onFileChange('resumeFile', f)}
-          error={errors.resumeFile}
-        />
-      </FormField>
 
       <FormField label="Profile Photo" hint="Optional, helps partners put a face to the name">
         <FileUpload
