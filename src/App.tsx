@@ -7,6 +7,7 @@ import { SearchBar } from './components/SearchBar'
 import { FilterBar } from './components/FilterBar'
 import { ActiveFilters } from './components/ActiveFilters'
 import { CandidateCard } from './components/CandidateCard'
+import { CandidateDetailModal } from './components/CandidateDetailModal'
 import { BottomCTA } from './components/BottomCTA'
 import { IntakeFormModal } from './components/intake/IntakeFormModal'
 import { RequestIntroModal } from './components/intro/RequestIntroModal'
@@ -24,6 +25,7 @@ function App() {
   const [location, setLocation] = useState('')
   const [isFormOpen, setIsFormOpen] = useState(false)
   const [introCandidate, setIntroCandidate] = useState<string | null>(null)
+  const [selectedCandidate, setSelectedCandidate] = useState<Candidate | null>(null)
 
   const fetchCandidates = async () => {
     if (!isSupabaseConfigured || !supabase) {
@@ -172,6 +174,7 @@ function App() {
                   key={`${candidate.name}-${i}`}
                   candidate={candidate}
                   onRequestIntro={() => setIntroCandidate(candidate.name)}
+                  onClick={() => setSelectedCandidate(candidate)}
                 />
               ))}
             </div>
@@ -217,6 +220,19 @@ function App() {
       <AnimatePresence>
         {isFormOpen && (
           <IntakeFormModal onClose={handleFormClose} />
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {selectedCandidate && (
+          <CandidateDetailModal
+            candidate={selectedCandidate}
+            onClose={() => setSelectedCandidate(null)}
+            onRequestIntro={() => {
+              setIntroCandidate(selectedCandidate.name)
+              setSelectedCandidate(null)
+            }}
+          />
         )}
       </AnimatePresence>
 

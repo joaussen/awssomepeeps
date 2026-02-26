@@ -4,16 +4,20 @@ import type { Candidate } from '../data/candidates'
 interface CandidateCardProps {
   candidate: Candidate
   onRequestIntro?: () => void
+  onClick?: () => void
 }
 
-export function CandidateCard({ candidate, onRequestIntro }: CandidateCardProps) {
+export function CandidateCard({ candidate, onRequestIntro, onClick }: CandidateCardProps) {
   const initials = candidate.name
     .split(' ')
     .map((n) => n[0])
     .join('')
 
   return (
-    <div className="bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md hover:border-gray-200 transition-all duration-200 flex flex-col">
+    <div
+      onClick={onClick}
+      className="bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md hover:border-gray-200 transition-all duration-200 flex flex-col cursor-pointer"
+    >
       {/* Header */}
       <div className="p-5 pb-0">
         <div className="flex items-start gap-3">
@@ -75,7 +79,7 @@ export function CandidateCard({ candidate, onRequestIntro }: CandidateCardProps)
       </div>
 
       {/* Actions */}
-      <div className="px-5 pb-5 pt-4 flex items-center gap-2 mt-auto">
+      <div className="px-5 pb-5 pt-4 flex items-center gap-2 mt-auto" onClick={(e) => e.stopPropagation()}>
         <a
           href={candidate.linkedIn || '#'}
           target="_blank"
